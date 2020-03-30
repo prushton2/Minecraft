@@ -5,7 +5,7 @@ using UnityEngine;
 public class instanceManager : MonoBehaviour
 {
     // Start is called before the first frame update
-    List<Block> blocks = new List<Block>();
+    public List<Block> blocks = new List<Block>();
     void Start()
     {
         
@@ -14,17 +14,12 @@ public class instanceManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        foreach(Block block in blocks) {
-            //try{
-                if(!block.isRendered) {
-                    block.render();
-                    Debug.Log("Rendered Block");
-                }
-            //}catch{}
-        }
-        if(Input.GetKeyDown(PlayerPrefs.GetString("Interact"))) {
-            blocks.Add(new Stone());
-            Debug.Log(blocks.Count);
-        }
+
+    }
+    public void placeBlock(Vector3 pos, Vector3 rot) {
+        Instantiate(GameObject.Find("Stone"), pos, Quaternion.Euler(rot.x, rot.y, rot.z));
+    }
+    public void breakBlock(RaycastHit hit) {
+        Destroy(hit.transform.gameObject);
     }
 }

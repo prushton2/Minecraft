@@ -3,9 +3,9 @@ using System.Collections;
 public class Player : MonoBehaviour
 {
   CharacterController characterController;
-  public float speed = 12.5f;
-  public float runMultiplier = 1.5f;
-  public float jumpSpeed = 0.25f;
+  public float speed = 7f;
+  public float runMultiplier = 1.25f;
+  public float jumpSpeed = 0.16f;
   public float gravity = 1f;
   public int life = 2;
   public float deltaX;
