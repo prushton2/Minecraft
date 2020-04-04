@@ -22,7 +22,7 @@ public class Player : MonoBehaviour
   void Update()
   {
 
-
+/
 
     deltaX += Input.GetAxisRaw("Mouse X");
     transform.rotation = Quaternion.Euler(0, float.Parse(PlayerPrefs.GetString("Sensitivity"))*deltaX, 0);
