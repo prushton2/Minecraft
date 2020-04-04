@@ -65,4 +65,7 @@ public class Player : MonoBehaviour
       moveDirection.y = jumpSpeed;
     }
   }
+  public Vector3 occupiedBlock() {
+    return new Vector3 (((float)((int)transform.position.x))+.5f, ((float)((int)transform.position.y))+.5f, ((float)((int)transform.position.z))+.5f);
+  }
 }

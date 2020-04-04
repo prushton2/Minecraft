@@ -20,25 +20,29 @@ public class Camera : MonoBehaviour {
       }
 
       if(Input.GetMouseButtonDown(1)) {
-        RaycastHit hit; //Creates a raycast instance saved in hit
-        //                  Start pos               Direction                 Forward         Output    Range
-        //                        |                       |                        |          variable   |
-        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, 100)) { //Return true if it hit something
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, 100)) {
           Vector3 objpos = new Vector3(hit.transform.position.x, hit.transform.position.y, hit.transform.position.z);
           Vector3 pos = objpos + hit.normal;
-          mgr.GetComponent<instanceManager>().placeBlock(pos, new Vector3(0,0,0));
+          mgr.GetComponent<instanceManager>().placeBlock(pos, new Vector3(0,0,0), hit);
         }
       }
 
       if(Input.GetMouseButtonDown(0)) {
-        RaycastHit hit; //Creates a raycast instance saved in hit
-        //                  Start pos               Direction                 Forward         Output    Range
-        //                        |                       |                        |          variable   |
-        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, 100)) { //Return true if it hit something
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, 5, 9)) {
           mgr.GetComponent<instanceManager>().breakBlock(hit);
         }
-          
       }
+
+      if(Input.GetKeyDown("e")) {
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, 5, 9)) {
+          mgr.GetComponent<instanceManager>().interactBlock(hit);
+        }
+      }
+
+
       ChgInY += Input.GetAxisRaw("Mouse Y");
       if (ChgInY > 90f) {
         ChgInY = 90f;

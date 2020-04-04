@@ -16,10 +16,20 @@ public class instanceManager : MonoBehaviour
     {
 
     }
-    public void placeBlock(Vector3 pos, Vector3 rot) {
-        Instantiate(GameObject.Find("Stone"), pos, Quaternion.Euler(rot.x, rot.y, rot.z));
+    public void placeBlock(Vector3 pos, Vector3 rot, RaycastHit hit) {
+        if(GameObject.Find("Player").GetComponent<Player>().occupiedBlock() != pos && hit.transform.gameObject.name != "Player") {
+            // Debug.Log((pos, hit.transform.gameObject.name, hit.normal));
+            Instantiate(GameObject.Find("Stone"), pos, Quaternion.Euler(rot.x, rot.y, rot.z));
+        }
     }
     public void breakBlock(RaycastHit hit) {
-        Destroy(hit.transform.gameObject);
+        // Debug.Log(hit.transform.gameObject.tag);
+        if(hit.transform.gameObject.tag == "Block") {
+            Destroy(hit.transform.gameObject);
+        }
+    }
+
+    public bool interactBlock(RaycastHit hit) {
+        return hit.transform.gameObject.GetComponent<Block>().isInteractable;
     }
 }
